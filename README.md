@@ -19,7 +19,11 @@ VERSION 2:
 Added API function, game now playable with random words.
 Game now also tells you what the right answer is as opposed to before (nested loop fixed)
 
+
+VERSION 3:
+
+Added API for guesses, now checks guess against a real dictionary just like the real wordle.
+
 To Be Added:
 
-When word is guessed, check against dictionary to see if a real world like wordle.
 Basic GUI. 

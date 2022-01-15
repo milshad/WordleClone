@@ -51,6 +51,12 @@ available_alphabet = [
   "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
 ]
 
+def retrieve_dictionary_response(guess):
+
+  guess_url = (f"https://api.dictionaryapi.dev/api/v2/entries/en/{guess}")
+
+  return requests.get(guess_url)
+
 # will need to be a function so we can use recursion feeding back necessary variables requried to continue
 def game_sorter(count, attempts, available_alphabet, correct_answer, random_word): 
 
@@ -71,37 +77,47 @@ def game_sorter(count, attempts, available_alphabet, correct_answer, random_word
 
   guess = str(input("Enter Your Guess: "))
 
-  guess_array = list(guess) # takes the guess and splits it into array to match word format
-  
-  if (attempts == 0):
-    print(f"You ran out of attempts the word was: {random_word}")
-  
-  while ( (attempts != 0) and (correct_answer != True) ):             
-    if (guess_array == random_word):                               
-      print("Congratulations you have got the word!")         
-      correct_answer = True
-      break
-    for guess_letter in guess_array: # for each letter in array we do some checks
-      if not (guess_letter in random_word): # if the letter is not in word we add to the two arrays then continue to next letter
-        available_alphabet.remove(guess_letter) # removes a letter from the main alphabet if not in the main word
-        count += 1
-        continue
-      if (guess_letter == random_word[count]): # if the letter matches the letter in same position in main word  it adds it to good letters
-        guess_good_letters.append(guess_letter) # array so you know where the letter belongs
-        count += 1
-        continue
-      else: 
-        guess_wrong_position_letters.append(guess_letter) # if the letter is in the word and not in right place then falls into this array
-        count += 1
+  guess_confirmed = retrieve_dictionary_response(guess).status_code
 
-    # telling user his results of his guess
-    print(f"These letters were in the right spot: {guess_good_letters}")
-    print(f"These letters were correct but in the wrong spot: {guess_wrong_position_letters}")
-    print(f"These letters are the current available letters: {available_alphabet}")
+  if (guess_confirmed == 200):
+    guess_array = list(guess.upper()) # takes the guess and splits it into array to match word format
     
-    # reducing attempts & re-running function recursively with new values
-    attempts -= 1
-    game_sorter(0, attempts, available_alphabet, correct_answer, random_word)
+    if (attempts == 0):
+      print(f"You ran out of attempts the word was: {random_word}")
+    
+    while ( (attempts != 0) and (correct_answer != True) ):             
+      if (guess_array == random_word):                               
+        print("Congratulations you have got the word!")         
+        correct_answer = True
+        break
+      for guess_letter in guess_array: # for each letter in array we do some checks
+        if not (guess_letter in random_word): # if the letter is not in word we add to the two arrays then continue to next letter
+          available_alphabet.remove(guess_letter) # removes a letter from the main alphabet if not in the main word
+          count += 1
+          continue
+        if (guess_letter == random_word[count]): # if the letter matches the letter in same position in main word  it adds it to good letters
+          guess_good_letters.append(guess_letter) # array so you know where the letter belongs
+          count += 1
+          continue
+        else: 
+          guess_wrong_position_letters.append(guess_letter) # if the letter is in the word and not in right place then falls into this array
+          count += 1
 
+      # telling user his results of his guess
+      print(f"These letters were in the right spot: {guess_good_letters}")
+      print(f"These letters were correct but in the wrong spot: {guess_wrong_position_letters}")
+      print(f"These letters are the current available letters: {available_alphabet}")
+      
+      # reducing attempts & re-running function recursively with new values
+      attempts -= 1
+      game_sorter(0, attempts, available_alphabet, correct_answer, random_word)
+
+  else: 
+    print("Attempted guess was not a real word please try again.")
+    game_sorter(count, attempts, available_alphabet, correct_answer, random_word)
+
+ 
+
+  
   
 game_sorter(0, attempts, available_alphabet, correct_answer, random_word)
