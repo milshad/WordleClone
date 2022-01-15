@@ -21,8 +21,9 @@ for response in json_response:
 
 upper_range = len(five_letter_words)
 random_word_index = random.randint(0, upper_range)
-random_word = five_letter_words[random_word_index].upper()
+random_word = list(five_letter_words[random_word_index].upper())
 
+print(random_word)
 
 
 # user has six attempts before game ends
@@ -81,7 +82,7 @@ def game_sorter(count, attempts, available_alphabet, correct_answer, random_word
 
   if (guess_confirmed == 200):
     guess_array = list(guess.upper()) # takes the guess and splits it into array to match word format
-    
+
     if (attempts == 0):
       print(f"You ran out of attempts the word was: {random_word}")
     

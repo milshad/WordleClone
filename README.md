@@ -24,6 +24,9 @@ VERSION 3:
 
 Added API for guesses, now checks guess against a real dictionary just like the real wordle.
 
-To Be Added:
+VERSION 3.1:
+Fixed bug not showing game currently won 
 
+To Be Added:
+Being allowed to use letters used but removed from alphabet to allow easier word making
 Basic GUI. 
