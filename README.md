@@ -7,8 +7,8 @@ Also because I have no sense of purpose and moving from one project to another g
 
 HOW TO PLAY:
 
-CLONE THE REPO OR TAKE THE CODE IN GAME.PY AND RUN IT IN ANY PYTHON IDE (VSCODE ETC)
-IF WANTING TO PLAY IN BROWSER TAKE CODE AND MAKE REPL.IT ACCOUNT AND YOU CAN PASTE THERE ALL PACKAGES ARE SUPPORTED THERE
+Clone the repo or take the code in game.py and run it in any pthon IDE (VScode/Jetbrains etc)
+Can also be played in browswer by making an account on a place such as repl.it and hosting it there, all python packages are supported on repl.it
 
 VERSION 1:
 
