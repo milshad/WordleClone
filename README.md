@@ -3,7 +3,7 @@ Clone of popular game Wordle
 
 Being made in order to find out best strategy as well as cracking the best possible route
 
-Also because I have no sense of purpose and moving from one project to another gives me purpose until I forget about it completely after saying I'll commit time to it
+
 
 HOW TO PLAY:
 
